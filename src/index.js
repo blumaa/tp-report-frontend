@@ -7,6 +7,8 @@ import store from "./store";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 import { gql } from "apollo-boost";
+require ('newrelic');
+
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql"
