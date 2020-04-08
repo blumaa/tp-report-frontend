@@ -39,7 +39,6 @@
   vertical-align: middle;
   justify-content: space-around;
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
-
 }
 
 .navbar-left {
@@ -47,7 +46,6 @@
   display: flex;
   justify-content: space-around;
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
-
 }
 
 #navbar-header {
@@ -79,8 +77,6 @@ svg.main-logo {
     transform: rotate(360deg);
   }
 }
-
-
 
 @keyframes kaboom {
   80% {
@@ -136,13 +132,13 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;  height: 70vh;
+  justify-content: center;
+  height: 70vh;
   width: 100%;
   border: 6px solid rgb(71, 71, 71);
   border-radius: 4px;
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.75);
 }
-
 
 #init-map-message {
   display: flex;
@@ -156,12 +152,12 @@ a:hover {
   width: 600px;
   height: 40px;
   border-radius: 10px;
-  background-color: rgba(210, 212, 219, .6);
+  background-color: rgba(210, 212, 219, 0.6);
   /* display: flex; */
   box-shadow: 3px 3px 5px 0px rgba(61, 61, 61, 0.75);
   padding: 30px;
   border: 4px solid rgba(49, 49, 49, 0.7);
-  animation: hideshow 65s ease-out
+  animation: hideshow 65s ease-out;
 }
 
 @keyframes hideshow {
@@ -253,51 +249,60 @@ g.in-stock-logo {
 }
 
 /* main search box container */
-#main-message{
+#main-message {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;  
- 
+  justify-content: space-between;
 }
 
-#message-container{
+#message-container {
   width: 70%;
 }
 
-#main-message-left{
+#main-message-left {
   font-size: 1.2vw;
   position: relative;
   animation: fadein 10s ease, slideup 7s 5s ease-out;
-  
 }
 
-@keyframes fadein{
-  0% { opacity:0; }
-  66% { opacity:0; }
-  100% { opacity:1; }
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes slideright {
-  from {right: 500px;}
-  to {right: 0px; }
-  
+  from {
+    right: 500px;
+  }
+  to {
+    right: 0px;
+  }
 }
 
 @keyframes slideup {
-  from {top: 200px;}
-  to {top: 0px; }
-  
+  from {
+    top: 200px;
+  }
+  to {
+    top: 0px;
+  }
 }
 
-#main-message-right{
+#main-message-right {
   font-size: 1.2vw;
   position: relative;
   animation: fadein 10s ease, slideup 7s 5s ease-out;
-  
 }
-#search-box-container{
+#search-box-container {
   margin-bottom: 5px;
   width: 100%;
   display: flex;
@@ -306,7 +311,7 @@ g.in-stock-logo {
   /* border: 4px solid rgba(250, 61, 61, 0.7); */
 }
 
-#search-form{
+#search-form {
   width: 100%;
 }
 
@@ -318,8 +323,6 @@ g.in-stock-logo {
   width: 70%;
   height: 70%;
   text-align: center;
-  
-  
 }
 #search-button {
   margin-bottom: 10px;
@@ -338,5 +341,4 @@ g.in-stock-logo {
   justify-content: space-around;
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
   background: #282c34; */
-
 }
