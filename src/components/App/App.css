@@ -140,6 +140,25 @@ a:hover {
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.75);
 }
 
+#loading-map-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 1;
+  left: -350px;
+  top: -50px;
+  width: 600px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: rgba(210, 212, 219, 0.6);
+  /* display: flex; */
+  box-shadow: 3px 3px 5px 0px rgba(61, 61, 61, 0.75);
+  padding: 30px;
+  border: 4px solid rgba(49, 49, 49, 0.7);
+}
+
 #init-map-message {
   display: flex;
   flex-direction: column;
@@ -157,7 +176,7 @@ a:hover {
   box-shadow: 3px 3px 5px 0px rgba(61, 61, 61, 0.75);
   padding: 30px;
   border: 4px solid rgba(49, 49, 49, 0.7);
-  animation: hideshow 65s ease-out;
+  /* animation: hideshow 65s ease-out; */
 }
 
 @keyframes hideshow {
@@ -249,6 +268,19 @@ g.in-stock-logo {
 }
 
 /* main search box container */
+
+#main-message-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#message-error{
+  color: red
+}
+
 #main-message {
   width: 100%;
   display: flex;
