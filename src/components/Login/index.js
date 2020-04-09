@@ -63,7 +63,8 @@ function Login(props) {
 
     return (
         <>
-            <h1>Login</h1>
+        <h1>coming soon</h1>
+            {/* <h1>Login</h1>
             <div className="auth-form">
                 <form onSubmit={submit}>
                     <input className="form-input" type="email" placeholder="Email" value={email} onChange={handleChange(setEmail)} />
@@ -73,7 +74,7 @@ function Login(props) {
 
                     <input className="form-submit" type="submit" value={loading ? "Verifying..." : "Login"} />
                 </form>
-            </div>
+            </div> */}
         </>
     )
 }
