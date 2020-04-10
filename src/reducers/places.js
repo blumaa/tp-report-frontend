@@ -1,4 +1,3 @@
-import { GET_PlACE, GET_PLACES } from '../constants/action_types';
 
 // src/reducers/reports.js
 const INITIAL_STATE = {
@@ -9,10 +8,10 @@ const INITIAL_STATE = {
 
 function placesReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case "GET_PLACES": {
-      // console.log(action)
-      // return { authUser: action.authUser, loading: false };
-    }
+    // case "GET_PLACES": {
+    //   // console.log(action)
+    //   // return { authUser: action.authUser, loading: false };
+    // }
     case "SET_MAP_CENTER": {
       // console.log(action.locale)
       return {
@@ -47,7 +46,7 @@ function placesReducer(state = INITIAL_STATE, action) {
       // place.reports.length > 0 ? newPlace.reports = [...place.reports, action.report.data.addReport] : newPlace.reports = [action.report.data.addReport] 
       // console.log('ye neweth place', newPlace/)
       const newAllPlaces = state.allPlaces.filter(place=>{
-        return place.id != action.marker.id
+        return place.id !== action.marker.id
       })
       // console.log('all the new places', newAllPlaces)
       return {

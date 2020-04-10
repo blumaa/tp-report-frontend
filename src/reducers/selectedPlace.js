@@ -1,4 +1,3 @@
-import { SET_SELECTED_MARKER } from "../constants/action_types";
 
 // src/reducers/reports.js
 const INITIAL_STATE = {

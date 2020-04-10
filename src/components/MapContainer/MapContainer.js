@@ -1,21 +1,13 @@
-import React, { useCallback, useState, useMemo } from "react";
+import React, { useCallback, useState } from "react";
 import GoogleMapReact from "google-map-react";
-import Geocode from "react-geocode";
 import MapMarker from "../MapMarker/MapMarker";
-import gql from "graphql-tag";
-import { createApolloFetch } from "apollo-fetch";
-import { HttpLink } from "apollo-link-http";
-import { execute, makePromise } from "apollo-link";
 
 import { useMappedState } from "redux-react-hook";
 
-import { useDispatch } from "redux-react-hook";
-import * as actions from "../../constants/action_types";
 
 const MapContainer = ({ loading, error, initMap }) => {
   const [lat, setLat] = useState(52.536228);
   const [lng, setLng] = useState(13.42606);
-  const dispatch = useDispatch();
 
   const mapState = useCallback((state) => {
     return {
@@ -25,12 +17,6 @@ const MapContainer = ({ loading, error, initMap }) => {
   }, []);
 
   const { places, mapCenter } = useMappedState(mapState);
-
-  let berror = false;
-
-  if (places.length < 1 && !initMap) {
-    berror = true;
-  }
 
   const InitialMap = () => {
     return (
@@ -70,15 +56,15 @@ const MapContainer = ({ loading, error, initMap }) => {
     );
   });
 
-  console.log(
-    "loading:",
-    loading,
-    "error",
-    error,
-    "initMap",
-    initMap,
-    places.length
-  );
+  // console.log(
+  //   "loading:",
+  //   loading,
+  //   "error",
+  //   error,
+  //   "initMap",
+  //   initMap,
+  //   places.length
+  // );
 
   const mapSwitch = (loading, error, lat, lng) => {
     if (loading) {

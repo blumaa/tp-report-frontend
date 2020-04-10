@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const SearchBox = ({ changeLocation, error, loading }) => {
   const [location, setLocation] = useState(null);
@@ -13,11 +12,6 @@ const SearchBox = ({ changeLocation, error, loading }) => {
     changeLocation(location);
   };
 
-  const ErrorMessage = () => {
-    if (!loading && error) {
-      return <div>No places found!</div>;
-    }
-  };
 
   return (
     <>

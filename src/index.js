@@ -6,7 +6,7 @@ import { StoreContext } from "redux-react-hook";
 import store from "./store";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
-import { gql } from "apollo-boost";
+// import { gql } from "apollo-boost";
 
 
 const client = new ApolloClient({

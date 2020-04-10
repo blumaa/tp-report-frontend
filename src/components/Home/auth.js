@@ -1,5 +1,5 @@
 // src/components/Home/auth.js
-import React, { useState } from 'react';
+import React from 'react';
 
 
 function AuthHome() {

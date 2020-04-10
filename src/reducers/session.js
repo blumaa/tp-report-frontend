@@ -1,4 +1,3 @@
-import { SET_AUTH_USER } from '../constants/action_types';
 
 // src/reducers/session.js
 const INITIAL_STATE = {

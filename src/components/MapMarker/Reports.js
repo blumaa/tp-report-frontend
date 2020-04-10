@@ -8,9 +8,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
-import { useQuery } from "@apollo/react-hooks";
-
-import gql from "graphql-tag";
 
 const renderReports = (data) => {
   // console.log(data);
@@ -25,11 +22,11 @@ const renderReports = (data) => {
       // console.log(report);
       let usaTime = new Date(report.dateTime).toLocaleString("en-US", {timeZone: "America/New_York"});
       usaTime = new Date(usaTime).toLocaleString();
-      console.log('USA time: '+usaTime)
+      // console.log('USA time: '+usaTime)
       
       let berlinTime = new Date(report.dateTime).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
       berlinTime = new Date(berlinTime).toLocaleString();
-      console.log('Berlin time: '+berlinTime)
+      // console.log('Berlin time: '+berlinTime)
 
 
       return report.status === "inStock" ? (

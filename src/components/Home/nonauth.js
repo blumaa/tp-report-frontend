@@ -8,7 +8,6 @@ import { useDispatch } from "redux-react-hook";
 import * as actions from "../../constants/action_types";
 
 import Geocode from "react-geocode";
-import Map from "../MapContainer/MapTest";
 
 const NonAuthHome = () => {
   const [loading, setLoading] = useState(false);
@@ -85,7 +84,7 @@ const NonAuthHome = () => {
     // console.log("uri", uri);
     const response = await fetch(uri, headers);
     const json = await response.json();
-    console.log("map data from json", json.status, json.results);
+    // console.log("map data from json", json.status, json.results);
 
     if (json.status === 'OK') {
       setError(false)

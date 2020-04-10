@@ -11,11 +11,8 @@ import Chip from "@material-ui/core/Chip";
 import InStockLogo from "../App/images/inStockLogo";
 import OutOfStockLogo from "../App/images/outOfStockLogo";
 
-import RoomRoundedIcon from "@material-ui/icons/RoomRounded";
 import Badge from "@material-ui/core/Badge";
 
-import RoomIcon from "@material-ui/icons/Room";
-import NotListedLocationOutlinedIcon from "@material-ui/icons/NotListedLocationOutlined";
 import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
 
 import Typography from "@material-ui/core/Typography";
@@ -159,7 +156,7 @@ const MapMarker = ({ marker }) => {
           return dateB - dateA;
         });
 
-    const latestReport = sortedReports[0];
+    // const latestReport = sortedReports[0];
 
     const status = !marker.reports ? "noReports" : sortedReports[0].status;
 
@@ -169,17 +166,10 @@ const MapMarker = ({ marker }) => {
     } else if (status === "inStock") {
       return <InStockLogo />;
     } else if (status === "noReports") {
-      return <NotListedLocationIcon fontSize="large" />;
+      return <NotListedLocationIcon fontSize="large" id="not-listed-marker"/>;
     }
   };
 
-  const SmallAvatar = withStyles((theme) => ({
-    root: {
-      width: 12,
-      height: 12,
-      border: `2px solid ${theme.palette.background.paper}`,
-    },
-  }))(Avatar);
 
   return (
     <div>
