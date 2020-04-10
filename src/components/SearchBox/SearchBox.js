@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+
 
 const SearchBox = ({ changeLocation, error, loading }) => {
   const [location, setLocation] = useState(null);
@@ -10,6 +12,22 @@ const SearchBox = ({ changeLocation, error, loading }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     changeLocation(location);
+    const requestBody = {
+      query: `
+      mutation addTerm($term: String!) {
+        addTerm(term: $term) {
+          term
+          dateTime
+        }
+      }
+      `,
+      variables: { term: `${location}` },
+    };
+
+    const { data } = await axios.post(
+      "http://localhost:8080/graphql",
+      requestBody
+    );
   };
 
 

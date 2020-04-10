@@ -6,7 +6,7 @@ import Logo from "../App/images/logo";
 function NonAuthNavigation() {
   return (
     <div className="navbar">
-      <div class="navbar-button">
+      <div className="navbar-button">
         <div className="navbar-left">
           <Link to={routes.HOME}>HOME</Link>
         </div>
@@ -17,7 +17,7 @@ function NonAuthNavigation() {
         </div>
         <div className="navbar-title">TP REPORT</div>
       </div>
-      <div class="navbar-button">
+      <div className="navbar-button">
         <div className="navbar-right">
           {/* <Link to={routes.SIGN_UP}>SIGN UP</Link> */}
           <Link to={routes.LOGIN}>LOGIN</Link>
