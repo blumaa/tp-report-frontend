@@ -25,7 +25,7 @@ const SearchBox = ({ changeLocation, error, loading }) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:8080/graphql",
+      "https://tp-report-backend.herokuapp.com/graphql",
       requestBody
     );
   };
