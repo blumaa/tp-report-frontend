@@ -23,12 +23,8 @@ const Analytics = () => {
         "https://tp-report-backend.herokuapp.com/graphql",
         requestBody
       );
-      const sortedReports = data.data.searchTerms.sort(function compare(a, b) {
-        var dateA = new Date(a.dateTime);
-        var dateB = new Date(b.dateTime);
-        return dateB - dateA;
-      });
-      setTerms(sortedReports); // ...
+ 
+      setTerms(data.data.searchterms); // ...
     }
     fetchData();
   }, []);
