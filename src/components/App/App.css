@@ -34,7 +34,7 @@
     margin-bottom: 5px;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     
     /* border: 4px solid rgba(250, 61, 61, 0.7); */
@@ -47,7 +47,6 @@
 
   /* search box container */
   #search-box {
-    margin-bottom: 10px;
     margin-right: 10px;
     border-radius: 5px;
     width: 70%;
@@ -215,7 +214,7 @@
     margin-bottom: 5px;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     /* border: 4px solid rgba(250, 61, 61, 0.7); */
   }
@@ -226,11 +225,9 @@
 
   /* search box container */
   #search-box {
-    margin-bottom: 10px;
-    margin-right: 10px;
     border-radius: 5px;
-    width: 70%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
     text-align: center;
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.75);
 
@@ -263,7 +260,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
   }
 
   #message-container {
@@ -415,9 +411,11 @@ g.main-logo {
 
 #search-box-container {
   display: flex;
+  margin-right: 10px;
 }
 
 #map-container {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -569,4 +567,10 @@ g.in-stock-logo {
   justify-content: space-around;
   box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
   background: #282c34; */
+}
+
+#search-result{
+  color: black;
+  font-size: 1rem;
+
 }

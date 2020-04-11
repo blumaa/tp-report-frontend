@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MapContainer from "../MapContainer/MapContainer";
 import SearchBox from "../SearchBox/SearchBox";
+import LocationSearchInput from '../SearchBox/AutoSearch'
 
 import axios from "axios";
 
@@ -121,7 +122,8 @@ const NonAuthHome = () => {
   };
   return (
     <div id="main">
-      <SearchBox changeLocation={triggerLocationChange} loading={loading} error={error} />
+      <LocationSearchInput changeLocation={triggerLocationChange} loading={loading} error={error} />
+      {/* <SearchBox changeLocation={triggerLocationChange} loading={loading} error={error} /> */}
       <MapContainer loading={loading} error={error} initMap={initMap} />
     </div>
   );
