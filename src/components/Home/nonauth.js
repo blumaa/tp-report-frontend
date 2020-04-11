@@ -82,11 +82,11 @@ const NonAuthHome = () => {
       "X-Requested-With": "XMLHttpRequest",
       "mode" : 'cors'
     };
-    const uri = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=supermarket&key=AIzaSyBJhyN7v8TJyfUU1HEMiQ1lTs4mXHJ1LtQ`;
+    const uri = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&rankby=distance&keyword=supermarket&key=AIzaSyBJhyN7v8TJyfUU1HEMiQ1lTs4mXHJ1LtQ`;
     // console.log("uri", uri);
     const response = await fetch(uri, headers);
     const json = await response.json();
-    // console.log("map data from json", json.status, json.results);
+    console.log("map data from json", json.status, json.results);
 
     if (json.status === 'OK') {
       setError(false)
