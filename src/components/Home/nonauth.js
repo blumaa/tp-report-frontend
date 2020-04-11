@@ -80,6 +80,7 @@ const NonAuthHome = () => {
     setInitMap(false);
     const headers = {
       "X-Requested-With": "XMLHttpRequest",
+      "mode" : 'cors'
     };
     const uri = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=1500&type=supermarket&key=AIzaSyBJhyN7v8TJyfUU1HEMiQ1lTs4mXHJ1LtQ`;
     // console.log("uri", uri);
