@@ -27,7 +27,7 @@ const renderReports = (data) => {
       
       let berlinTime = new Date(report.dateTime.replace(/\s/, 'T')).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
       berlinTime = new Date(berlinTime).toLocaleString();
-      // console.log('Berlin time: '+berlinTime)
+      console.log('Berlin time: '+berlinTime)
 
 
       return report.status === "inStock" ? (
