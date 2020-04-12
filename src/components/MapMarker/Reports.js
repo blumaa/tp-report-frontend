@@ -19,13 +19,19 @@ const renderReports = (data) => {
   });
   
     return sortedReports.map((report) => {
-      console.log(report.dateTime);
+      console.log(report);
       // 2020-04-10T15:12:51.334Z
-      let usaTime = new Date(report.dateTime.replace(/\s/, 'T')).toLocaleString("en-US", {timeZone: "America/New_York"});
-      usaTime = new Date(usaTime).toLocaleString();
-      // console.log('USA time: '+usaTime)
+      // let time = report.dateTime.toLocaleString(); 
+      // let time = new Date(report.dateTime).toLocaleString("en-DE", {timeZone: "Europe/Berlin"})
+      let dateString = report.dateTime.replace(/-/g, '/').replace('T', ' ');
       
-      let berlinTime = new Date(report.dateTime.replace(/\s/, 'T')).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
+      let time = new Date(dateString).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
+      console.log(time)
+      let usaTime = new Date(dateString).toLocaleString("en-US", {timeZone: "America/New_York"});
+      usaTime = new Date(usaTime).toLocaleString();
+      console.log('USA time: '+usaTime)
+      
+      let berlinTime = new Date(dateString).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
       berlinTime = new Date(berlinTime).toLocaleString();
       console.log('Berlin time: '+berlinTime)
 
@@ -36,6 +42,7 @@ const renderReports = (data) => {
             <ShoppingCartIcon style={{ color: green[500] }} />
           </ListItemIcon>
           <ListItemText>In stock | Berlin Time: {berlinTime} | USA Time: {usaTime}</ListItemText>
+          {/* <ListItemText>In stock | Reported: {time}</ListItemText> */}
         </ListItem>
       ) : (
         <ListItem key={report.id}>
@@ -43,6 +50,7 @@ const renderReports = (data) => {
             <RemoveShoppingCartIcon style={{ color: red[500] }} />
           </ListItemIcon>
           <ListItemText>Out of stock | Berlin Time: {berlinTime} | USA Time: {usaTime}</ListItemText>
+          {/* <ListItemText>Out of stock | Reported: {time}</ListItemText> */}
         </ListItem>
       );
     });
