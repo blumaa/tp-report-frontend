@@ -86,7 +86,7 @@ const NonAuthHome = () => {
     // console.log("uri", uri);
     const response = await fetch(uri, headers);
     const json = await response.json();
-    console.log("map data from json", json.status, json.results);
+    // console.log("map data from json", json.status, json.results);
 
     if (json.status === 'OK') {
       setError(false)

@@ -3,7 +3,9 @@ import GoogleMapReact from "google-map-react";
 import MapMarker from "../MapMarker/MapMarker";
 
 import { useMappedState } from "redux-react-hook";
-
+import InStockLogo from "../App/images/inStockLogo";
+import OutOfStockLogo from "../App/images/outOfStockLogo";
+import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
 
 const MapContainer = ({ loading, error, initMap }) => {
   const [lat, setLat] = useState(52.536228);
@@ -23,6 +25,30 @@ const MapContainer = ({ loading, error, initMap }) => {
       <div id="init-map-message">
         <div id="init-map-message-text">
           User search bar to find toilet paper nearby.
+        </div>
+        <div id="init-map-message-text">
+          <div id="init-message-marker-container">
+            <div id="init-message-marker-split">
+              <div id="init-message-marker-logo">
+                <InStockLogo />
+              </div>
+              <div id="init-message-marker-text">In Stock</div>
+            </div>
+            <div id="init-message-marker-split">
+              <div id="init-message-marker-logo">
+                <OutOfStockLogo />
+              </div>
+              <div id="init-message-marker-text"> Out of Stock</div>
+            </div>
+            <div id="init-message-marker-split">
+              <div id="init-message-marker-logo">
+                <NotListedLocationIcon
+                  id='not-listed-logo'
+                />
+              </div>
+              <div id="init-message-marker-text"> No Reports</div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -67,14 +93,14 @@ const MapContainer = ({ loading, error, initMap }) => {
   // );
 
   const mapSwitch = (loading, error, lat, lng) => {
-    if (loading) {
-      return <LoadingMap lat={lat} lng={lng} />;
+    if (initMap) {
+      return <InitialMap />;
+    } else if (loading) {
+      return <LoadingMap />;
     } else if (!loading && !error) {
       return MappedMarkers;
     } else if (!loading && error) {
-      return <ErrorMap lat={lat} lng={lng} />;
-    } else {
-      return <InitialMap lat={lat} lng={lng} />;
+      return <ErrorMap />;
     }
   };
   return (

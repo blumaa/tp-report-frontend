@@ -19,7 +19,8 @@ const renderReports = (data) => {
   });
   
     return sortedReports.map((report) => {
-      // console.log(report);
+      console.log(report.dateTime);
+      // 2020-04-10T15:12:51.334Z
       let usaTime = new Date(report.dateTime).toLocaleString("en-US", {timeZone: "America/New_York"});
       usaTime = new Date(usaTime).toLocaleString();
       // console.log('USA time: '+usaTime)

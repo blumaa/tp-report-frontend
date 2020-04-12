@@ -10,10 +10,10 @@ import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
 import InStockLogo from "../App/images/inStockLogo";
 import OutOfStockLogo from "../App/images/outOfStockLogo";
+import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
 
 import Badge from "@material-ui/core/Badge";
 
-import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
 
 import Typography from "@material-ui/core/Typography";
 import Slide from "@material-ui/core/Slide";
@@ -166,7 +166,7 @@ const MapMarker = ({ marker }) => {
     } else if (status === "inStock") {
       return <InStockLogo />;
     } else if (status === "noReports") {
-      return <NotListedLocationIcon fontSize="large" id="not-listed-marker"/>;
+      return <NotListedLocationIcon id="not-listed-logo"/>;
     }
   };
 
