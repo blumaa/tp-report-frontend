@@ -21,11 +21,11 @@ const renderReports = (data) => {
     return sortedReports.map((report) => {
       console.log(report.dateTime);
       // 2020-04-10T15:12:51.334Z
-      let usaTime = new Date(report.dateTime).toLocaleString("en-US", {timeZone: "America/New_York"});
+      let usaTime = new Date(report.dateTime).replace(/\s/, 'T').toLocaleString("en-US", {timeZone: "America/New_York"});
       usaTime = new Date(usaTime).toLocaleString();
       // console.log('USA time: '+usaTime)
       
-      let berlinTime = new Date(report.dateTime).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
+      let berlinTime = new Date(report.dateTime).replace(/\s/, 'T').toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
       berlinTime = new Date(berlinTime).toLocaleString();
       // console.log('Berlin time: '+berlinTime)
 
