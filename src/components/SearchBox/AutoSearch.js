@@ -30,7 +30,7 @@ class LocationSearchInput extends React.Component {
     };
 
     axios.post("https://tp-report-backend.herokuapp.com/graphql", requestBody);
-
+    this.setState({address: ""})
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
     //   .then((latLng) => console.log("Success", latLng))
@@ -68,7 +68,7 @@ class LocationSearchInput extends React.Component {
                         : "suggestion-item";
                       // inline style for demonstration purpose
                       const style = suggestion.active
-                        ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                        ? { backgroundColor: "#B5B5B5", cursor: "pointer" }
                         : { backgroundColor: "#ffffff", cursor: "pointer" };
                       return (
                         <div
@@ -89,8 +89,8 @@ class LocationSearchInput extends React.Component {
                   </div>
                 </div>
               </div>
-              {this.props.loading ? <div>Loading results...</div> : null}
-              {!this.props.loading && this.props.error ? <div>No places found!</div> : null}
+              {/* {this.props.loading ? <div>Loading results...</div> : null}
+              {!this.props.loading && this.props.error ? <div>No places found!</div> : null} */}
             </div>
           </>
         )}
