@@ -23,16 +23,20 @@ const renderReports = (data) => {
       // 2020-04-10T15:12:51.334Z
       // let time = report.dateTime.toLocaleString(); 
       // let time = new Date(report.dateTime).toLocaleString("en-DE", {timeZone: "Europe/Berlin"})
+
+      let datestr = report.dateTime.split(/[-T.]/);
+      var safdat = new Date( datestr.slice(0,3).join('/')+' '+datestr[3] );
+
       let dateString = report.dateTime.replace(/-/g, '/').replace('T', ' ');
       
       let time = new Date(dateString).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
       console.log(time)
-      let usaTime = new Date(dateString).toLocaleString("en-US", {timeZone: "America/New_York"});
-      usaTime = new Date(usaTime).toLocaleString();
+      let usaTime = new Date(safdat).toLocaleString("en-US", {timeZone: "America/New_York"});
+      // usaTime = new Date(usaTime).toLocaleString();
       console.log('USA time: '+usaTime)
       
-      let berlinTime = new Date(dateString).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
-      berlinTime = new Date(berlinTime).toLocaleString();
+      let berlinTime = new Date(safdat).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
+      // berlinTime = new Date(berlinTime).toLocaleString();
       console.log('Berlin time: '+berlinTime)
 
 
