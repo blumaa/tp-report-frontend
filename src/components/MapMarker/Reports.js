@@ -26,13 +26,13 @@ const renderReports = (data) => {
 
       let datestr = report.dateTime.split(/[-T.]/);
       var safdat = new Date( datestr.slice(0,3).join('/')+' '+datestr[3] );
-      console.log(safdat)
+      console.log("safdat", safdat)
 
       let dateString = report.dateTime.replace(/-/g, '/').replace('T', ' ');
       
-      let time = new Date(dateString).toLocaleString();
+      let time = new Date(safdat).toLocaleString();
       // let time = new Date(dateString).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
-      // console.log(time)
+      console.log("time", time)
       let usaTime = new Date(safdat).toLocaleString("en-US", {timeZone: "America/New_York"});
       // usaTime = new Date(usaTime).toLocaleString();
       console.log('USA time: '+usaTime)
