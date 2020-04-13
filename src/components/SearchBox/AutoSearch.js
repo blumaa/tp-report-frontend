@@ -16,7 +16,9 @@ class LocationSearchInput extends React.Component {
   };
 
   handleSelect = (address) => {
+    // console.log(address)
     this.props.changeLocation(address);
+    this.setState({address})
     const requestBody = {
       query: `
       mutation addTerm($term: String!) {
@@ -30,7 +32,7 @@ class LocationSearchInput extends React.Component {
     };
 
     axios.post("https://tp-report-backend.herokuapp.com/graphql", requestBody);
-    this.setState({address: ""})
+    // this.setState({address: ""})
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
     //   .then((latLng) => console.log("Success", latLng))
@@ -38,11 +40,13 @@ class LocationSearchInput extends React.Component {
   };
 
   render() {
+    
     return (
       <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}
+        highlightFirstSuggestion={true}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <>
