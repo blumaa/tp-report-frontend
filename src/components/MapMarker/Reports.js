@@ -19,7 +19,7 @@ const renderReports = (data) => {
   });
   
     return sortedReports.map((report) => {
-      console.log(report);
+      // console.log(report);
       // 2020-04-10T15:12:51.334Z
       // let time = report.dateTime.toLocaleString(); 
       // let time = new Date(report.dateTime).toLocaleString("en-DE", {timeZone: "Europe/Berlin"})
@@ -30,14 +30,14 @@ const renderReports = (data) => {
       let dateString = report.dateTime.replace(/-/g, '/').replace('T', ' ');
       
       let time = new Date(dateString).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
-      console.log(time)
+      // console.log(time)
       let usaTime = new Date(safdat).toLocaleString("en-US", {timeZone: "America/New_York"});
       // usaTime = new Date(usaTime).toLocaleString();
-      console.log('USA time: '+usaTime)
+      // console.log('USA time: '+usaTime)
       
       let berlinTime = new Date(safdat).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
       // berlinTime = new Date(berlinTime).toLocaleString();
-      console.log('Berlin time: '+berlinTime)
+      // console.log('Berlin time: '+berlinTime)
 
 
       return report.status === "inStock" ? (
