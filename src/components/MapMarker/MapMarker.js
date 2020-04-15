@@ -137,7 +137,7 @@ const MapMarker = ({ marker }) => {
       }`,
       variables: { googleId: `${marker.id}`, placeName: `${marker.name}` },
     }).then((res) => {
-      console.log('added a report', res)
+      // console.log('added a report', res)
       // addReportToMarker(res)
       const add = (res) => {
         dispatch({ type: actions.ADD_REPORT, report: res, marker });

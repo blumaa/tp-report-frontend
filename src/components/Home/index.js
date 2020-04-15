@@ -59,7 +59,7 @@ const Home = () => {
         }
       }
       `,
-      variables: { googleId: `${place.id}` },
+      variables: { googleId: `${place.place_id}` },
     };
 
     const { data } = await axios.post(
