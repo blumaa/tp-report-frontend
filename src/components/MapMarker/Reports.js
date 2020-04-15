@@ -7,6 +7,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Moment from 'react-moment';
 
 
 const renderReports = (data) => {
@@ -19,27 +20,27 @@ const renderReports = (data) => {
   });
 
     return sortedReports.map((report) => {
-      console.log(report);
+      // console.log(report);
       // 2020-04-10T15:12:51.334Z
-      // let time = report.dateTime.toLocaleString(); 
+      // let time = report.dateTime.toLocaleString();
       // let time = new Date(report.dateTime).toLocaleString("en-DE", {timeZone: "Europe/Berlin"})
 
       let datestr = report.dateTime.split(/[-T.]/);
       var safdat = new Date( datestr.slice(0,3).join('/')+' '+datestr[3] );
-      console.log("safdat", safdat)
+      // console.log("safdat", safdat)
 
       let dateString = report.dateTime.replace(/-/g, '/').replace('T', ' ');
-      
+
       let time = new Date(safdat).toLocaleString();
       // let time = new Date(dateString).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
-      console.log("time", time)
+      // console.log("time", time)
       let usaTime = new Date(safdat).toLocaleString("en-US", {timeZone: "America/New_York"});
       // usaTime = new Date(usaTime).toLocaleString();
-      console.log('USA time: '+usaTime)
-      
+      // console.log('USA time: '+usaTime)
+
       let berlinTime = new Date(safdat).toLocaleString("en-DE", {timeZone: "Europe/Berlin"});
       // berlinTime = new Date(berlinTime).toLocaleString();
-      console.log('Berlin time: '+berlinTime)
+      // console.log('Berlin time: '+berlinTime)
 
 
       return report.status === "inStock" ? (
@@ -47,7 +48,7 @@ const renderReports = (data) => {
           <ListItemIcon>
             <ShoppingCartIcon style={{ color: green[500] }} />
           </ListItemIcon>
-          <ListItemText>In stock | Reported: {time}</ListItemText>
+          <ListItemText>In stock | Reported: <Moment format="LLLL">{report.dateTime}</Moment></ListItemText>
           {/* <ListItemText>In stock | Reported: {time}</ListItemText> */}
         </ListItem>
       ) : (
@@ -55,7 +56,7 @@ const renderReports = (data) => {
           <ListItemIcon>
             <RemoveShoppingCartIcon style={{ color: red[500] }} />
           </ListItemIcon>
-          <ListItemText>Out of stock | Reported: {time}</ListItemText>
+          <ListItemText>Out of stock | Reported: <Moment format="LLLL">{report.dateTime}</Moment></ListItemText>
           {/* <ListItemText>Out of stock | Reported: {time}</ListItemText> */}
         </ListItem>
       );
