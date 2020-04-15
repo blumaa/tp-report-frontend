@@ -9,6 +9,7 @@ import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Moment from 'react-moment';
 import 'moment/locale/de';
+import 'moment/locale/en';
 
 
 
