@@ -1,16 +1,25 @@
-import React, { useCallback } from 'react';
-import { useMappedState } from 'redux-react-hook';
-import AuthNavigation from './auth';
-import NonAuthNavigation from './nonauth';
+import React from "react";
+import { Link } from "react-router-dom";
+import * as routes from "../../constants/routes";
+import Logo from "../App/images/logo";
 
 function Navigation() {
-    const mapState = useCallback((state) => ({
-        authUser: state.sessionState.authUser
-    }), [])
+  return (
+    <div className="navbar">
 
-    const { authUser } = useMappedState(mapState);
-
-    return authUser ? <AuthNavigation /> : <NonAuthNavigation />
+      <div id="navbar-header">
+        <div className="navbar-logo">
+          <Logo />
+        </div>
+        <div className="navbar-title">TP REPORT</div>
+      </div>
+      <div className="navbar-button">
+        <div className="navbar-right">
+          {/* <Link to={routes.SIGN_UP}>SIGN UP</Link> */}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Navigation;
