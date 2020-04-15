@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   listSection: {
     backgroundColor: "inherit",
-    fontSize: "13px"
+    fontSize: "13px",
   },
   ul: {
     backgroundColor: "inherit",
@@ -36,10 +36,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Analytics = () => {
   const [terms, setTerms] = useState([]);
+  const [reports, setReports] = useState([]);
+  const [places, setPlaces] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchTermData() {
       // You can await here
       const requestBody = {
         query: `
@@ -57,15 +59,76 @@ const Analytics = () => {
         "https://tp-report-backend.herokuapp.com/graphql",
         requestBody
       );
-
       setTerms(data.data.searchterms); // ...
     }
-    fetchData();
+
+    async function fetchReportsData() {
+      // You can await here
+      const requestBody = {
+        query: `
+        {
+          reports{
+            id
+            itemName
+            status
+            googleId
+            dateTime
+          }
+        }
+            `,
+      };
+
+      const { data } = await axios.post(
+        "https://tp-report-backend.herokuapp.com/graphql",
+        requestBody
+      );
+      console.log(data);
+      setReports(data.data.reports); // ...
+    }
+
+    async function fetchPlacesData() {
+      // You can await here
+      const requestBody = {
+        query: `
+        {
+          places{
+            name
+            googleId
+            reports{
+              status
+              dateTime
+            }
+          }
+        }
+            `,
+      };
+
+      const { data } = await axios.post(
+        "https://tp-report-backend.herokuapp.com/graphql",
+        requestBody
+      );
+      console.log(data);
+      setPlaces(data.data.places); // ...
+    }
+
+    fetchTermData();
+    fetchReportsData();
+    fetchPlacesData();
   }, []);
 
   //   console.log(terms);
 
-  const sortedReports = terms.sort(function compare(a, b) {
+  const sortedTerms = terms.sort(function compare(a, b) {
+    var dateA = new Date(a.dateTime);
+    var dateB = new Date(b.dateTime);
+    return dateB - dateA;
+  });
+  const sortedReports = reports.sort(function compare(a, b) {
+    var dateA = new Date(a.dateTime);
+    var dateB = new Date(b.dateTime);
+    return dateB - dateA;
+  });
+  const sortedPlaces = places.sort(function compare(a, b) {
     var dateA = new Date(a.dateTime);
     var dateB = new Date(b.dateTime);
     return dateB - dateA;
@@ -79,7 +142,7 @@ const Analytics = () => {
           <Paper className={classes.paper}>
             <List className={classes.root2} subheader={<li />}>
               {terms.length > 0 ? (
-                sortedReports.map((term) => {
+                sortedTerms.map((term) => {
                   //   console.log(term);
                   return (
                     <li key={term.id} className={classes.listSection}>
@@ -98,9 +161,45 @@ const Analytics = () => {
         </Grid>
         <Grid item xs={4}>
           <Paper className={classes.paper}>Reports</Paper>
+          <Paper className={classes.paper}>
+            <List className={classes.root2} subheader={<li />}>
+              {reports.length > 0 ? (
+                sortedReports.map((report) => {
+                  // console.log(report);
+                  return (
+                    <li key={report.id} className={classes.listSection}>
+                      {report.status} | googleId: {report.googleId} |
+                      {new Date(report.dateTime).toLocaleString("en-DE", {
+                        timeZone: "Europe/Berlin",
+                      })}
+                    </li>
+                  );
+                })
+              ) : (
+                <li>no terms</li>
+              )}
+            </List>
+          </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper className={classes.paper}>Places</Paper>
+          <Paper className={classes.paper}>
+            <List className={classes.root2} subheader={<li />}>
+              {places.length > 0 ? (
+                places.map((place) => {
+                  console.log(place);
+                  return (
+                    <li key={place.googleId} className={classes.listSection}>
+                      {place.name} | googleId: {place.googleId}
+                      
+                    </li>
+                  );
+                })
+              ) : (
+                <li>no terms</li>
+              )}
+            </List>
+          </Paper>
         </Grid>
       </Grid>
     </Container>
