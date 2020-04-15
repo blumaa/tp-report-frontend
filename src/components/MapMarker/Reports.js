@@ -17,7 +17,7 @@ const renderReports = (data) => {
     var dateB = new Date(b.dateTime);
     return dateB - dateA;
   });
-  
+
     return sortedReports.map((report) => {
       console.log(report);
       // 2020-04-10T15:12:51.334Z
@@ -81,7 +81,7 @@ const Reports = ({ marker }) => {
   //     }
   //   }
   // `;
-  
+
   // const { loading, error, data } = useQuery(GET_REPORTS);
 
   // console.log('this b the mark', marker);
