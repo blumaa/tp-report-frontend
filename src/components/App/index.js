@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import Navigation from '../Navigation';
 import Home from '../Home';
-import Signup from '../Signup';
-import Login from '../Login';
+// import Signup from '../Signup';
+// import Login from '../Login';
 import NotFound from '../NotFound';
 import Analytics from '../Admin/analytics';
 import useWithAuthenticate from '../WithAuthenticate';
@@ -33,9 +33,7 @@ function App() {
         <header className="App-header">
           <Switch>
             <Route exact path={routes.HOME} component={() => <Home />} />
-            <Route exact path={routes.SIGN_UP} component={() => <Signup />} />
-            <Route exact path={routes.LOGIN} component={() => <Login />} />
-            <Route exact path={routes.ANALYTICS} component={() => <Analytics />} />
+``            <Route exact path={routes.ANALYTICS} component={() => <Analytics />} />
             <Route component={NotFound} />
           </Switch>
         </header>
