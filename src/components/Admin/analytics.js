@@ -31,12 +31,16 @@ const Analytics = () => {
 
 //   console.log(terms);
 
-
+const sortedReports = terms.sort(function compare(a, b) {
+  var dateA = new Date(a.dateTime);
+  var dateB = new Date(b.dateTime);
+  return dateB - dateA;
+});
 
   return (
     <ul>
       {terms.length > 0 ? (
-        terms.map((term) => {
+        sortedReports.map((term) => {
         //   console.log(term);
           return (
             <li key={term.id}>
