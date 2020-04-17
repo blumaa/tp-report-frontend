@@ -6,10 +6,24 @@ import { useMappedState } from "redux-react-hook";
 import InStockLogo from "../App/images/inStockLogo";
 import OutOfStockLogo from "../App/images/outOfStockLogo";
 import NotListedLocationIcon from "@material-ui/icons/NotListedLocation";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
 
-const MapContainer = ({ loading, error, initMap }) => {
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+}));
+
+
+const MapContainer = ({ loading, error, initMap, progress }) => {
   const [lat, setLat] = useState(52.536228);
   const [lng, setLng] = useState(13.42606);
+  const classes = useStyles();
 
   const mapState = useCallback((state) => {
     return {
@@ -57,6 +71,7 @@ const MapContainer = ({ loading, error, initMap }) => {
     return (
       <div id="loading-map-message">
         <div id="init-map-message-text">Loading...</div>
+        <CircularProgress variant="determinate" value={progress} />
       </div>
     );
   };
