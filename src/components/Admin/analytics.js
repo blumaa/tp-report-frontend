@@ -7,13 +7,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import StatBar from './StatBar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     color: theme.palette.text.primary,
   },
   root2: {
@@ -82,7 +83,7 @@ const Analytics = () => {
         "https://tp-report-backend.herokuapp.com/graphql",
         requestBody
       );
-      console.log(data);
+      // console.log(data);
       setReports(data.data.reports); // ...
     }
 
@@ -107,7 +108,7 @@ const Analytics = () => {
         "https://tp-report-backend.herokuapp.com/graphql",
         requestBody
       );
-      console.log(data);
+      // console.log(data);
       setPlaces(data.data.places); // ...
     }
 
@@ -129,12 +130,16 @@ const Analytics = () => {
     return dateB - dateA;
   });
   const sortedPlaces = places.sort(function compare(a, b) {
+    // console.log(a, b)
     var dateA = new Date(a.dateTime);
     var dateB = new Date(b.dateTime);
     return dateB - dateA;
   });
 
+
   return (
+    <>
+    <StatBar />
     <Container maxWidth="lg">
       <Grid container direction="row" justify="center" alignItems="flex-start">
         <Grid item xs={4}>
@@ -187,7 +192,7 @@ const Analytics = () => {
             <List className={classes.root2} subheader={<li />}>
               {places.length > 0 ? (
                 places.map((place) => {
-                  console.log(place);
+                  // console.log(place);
                   return (
                     <li key={place.googleId} className={classes.listSection}>
                       {place.name} | googleId: {place.googleId}
@@ -203,6 +208,7 @@ const Analytics = () => {
         </Grid>
       </Grid>
     </Container>
+    </>
   );
 };
 

@@ -7,3 +7,5 @@ export const SET_MAP_CENTER = "SET_MAP_CENTER";
 export const CLEAR_PLACES = "CLEAR_PLACES";
 export const SET_SELECTED_MARKER = "SET_SELECTED_MARKER";
 export const ADD_REPORT = "ADD_REPORT";
+export const SET_TERMS = "SET_TERMS";
+export const SET_REPORTS = "SET_REPORTS";

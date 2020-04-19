@@ -10,17 +10,22 @@ import * as actions from "../../constants/action_types";
 
 import Geocode from "react-geocode";
 
+
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [initMap, setInitMap] = useState(true);
-  const dispatch = useDispatch();
+  const [progress, setProgress] = useState(0);
 
+  const dispatch = useDispatch();
+  
   const geoCodeLocation = (loc) => {
     Geocode.setApiKey("AIzaSyBJhyN7v8TJyfUU1HEMiQ1lTs4mXHJ1LtQ");
-
+    setProgress((oldProgress) => (oldProgress >= 100 ? 0 : oldProgress + 30));
+    
     Geocode.fromAddress(loc).then(
       (response) => {
+        console.log(loc)
         const { lat, lng } = response.results[0].geometry.location;
         // console.log(lat, lng);
         // this.fetchMarkers(lat, lng);
@@ -38,14 +43,14 @@ const Home = () => {
       (error) => {
         console.error(error);
       }
-    );
-  };
-
-  const getPlaceData = async (place) => {
-    // console.log(place)
-    const requestBody = {
-      query: `
-      query FetchPlace($googleId: String!){
+      );
+    };
+    
+    const getPlaceData = async (place) => {
+      // console.log(place)
+      const requestBody = {
+        query: `
+        query FetchPlace($googleId: String!){
         place(googleId: $googleId){
           name
           googleId
@@ -87,8 +92,9 @@ const Home = () => {
     const response = await fetch(uri, headers);
     const json = await response.json();
     console.log("map data from json", json.status, json.results);
-
+    
     if (json.status === 'OK') {
+      setProgress((oldProgress) => (oldProgress >= 100 ? 0 : oldProgress + 30));
       setError(false)
       setLoading(false);
       json.results.forEach((element) => {
@@ -98,11 +104,11 @@ const Home = () => {
           if (dbPlace === null) {
             // console.log("hi");
             dispatch({ type: actions.ADD_PLACE, place: element });
-  
+            
             // newMarkers.push(element)
           } else {
             let newPlace;
-  
+            
             newPlace = { ...element, reports: dbPlace.reports };
             dispatch({ type: actions.ADD_PLACE, place: newPlace });
             // console.log(newPlace);
@@ -117,15 +123,15 @@ const Home = () => {
       setError(true);
       // console.log(error)
     }
-
-
+    
+    
+    setProgress((oldProgress) => (oldProgress >= 100 ? 0 : oldProgress + 40));
     // console.log('loading', loading, 'error', error)
   };
   return (
     <div id="main">
       <LocationSearchInput changeLocation={triggerLocationChange} loading={loading} error={error} />
-      {/* <SearchBox changeLocation={triggerLocationChange} loading={loading} error={error} /> */}
-      <MapContainer loading={loading} error={error} initMap={initMap} />
+      <MapContainer loading={loading} error={error} initMap={initMap} progress={progress}/>
     </div>
   );
 };
