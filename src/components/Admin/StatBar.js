@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,35 +8,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.grey.A700,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 12,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-}))(TableRow);
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 100,
-    maxWidth: 400,
-    borderRadius: 10,
-  },
-});
+import { useDispatch } from "redux-react-hook";
+import * as actions from "../../constants/action_types";
+import { useMappedState } from "redux-react-hook";
 
 const CountReportsByDay = ({ reports }) => {
-  // console.log(reports);
   let todaysReports = 0;
   const date = new Date().toISOString();
 
@@ -49,20 +25,21 @@ const CountReportsByDay = ({ reports }) => {
 
   const newDate = isoStringToDate(date);
 
-  const currDay = newDate.getDay();
+  const currDay = newDate.getDate();
   const currMonth = newDate.getMonth();
 
-  // console.log('curr month day', currDay, currMonth)
-  reports.forEach((report) => {
-    // console.log(report)
-    const convert = isoStringToDate(report.dateTime);
-    const day = convert.getDay();
-    const month = convert.getMonth();
-    // console.log(day, month)
-    if (currMonth === month && currDay === day) {
-      todaysReports += 1;
-    }
-  });
+  if (reports) {
+    reports.forEach((report) => {
+      // console.log(report)
+      const convert = isoStringToDate(report.dateTime);
+      const day = convert.getDate();
+      const month = convert.getMonth();
+      // console.log(day, month)
+      if (currMonth === month && currDay === day) {
+        todaysReports += 1;
+      }
+    });
+  }
   const num = todaysReports;
 
   return <div>{num}</div>;
@@ -82,21 +59,23 @@ const CountReportsByYesterday = ({ reports }) => {
 
   const newDate = isoStringToDate(date);
 
-  const currDay = newDate.getDay() - 1;
+  const currDay = newDate.getDate() - 1;
   const currMonth = newDate.getMonth();
 
   // console.log('curr month day', currDay, currMonth)
-  reports.forEach((report) => {
-    // console.log(report)
-    const convert = isoStringToDate(report.dateTime);
-    const day = convert.getDay();
-    const month = convert.getMonth();
-    // console.log(day, month)
-    if (currMonth === month && currDay === day) {
-      todaysReports += 1;
-    }
-  });
-  const num = todaysReports;
+  if (reports) {
+    reports.forEach((report) => {
+      // console.log(report)
+      const convert = isoStringToDate(report.dateTime);
+      const day = convert.getDate();
+      const month = convert.getMonth();
+      // console.log(day, month)
+      if (currMonth === month && currDay === day) {
+        todaysReports += 1;
+      }
+    });
+  }
+  let num = todaysReports;
 
   return <div>{num}</div>;
 };
@@ -115,22 +94,24 @@ const CountSearchesByDay = ({ searches }) => {
 
   const newDate = isoStringToDate(date);
 
-  const currDay = newDate.getDay();
+  const currDay = newDate.getDate();
   const currMonth = newDate.getMonth();
 
   //   console.log("curr month day", currDay, currMonth);
-  searches.forEach((search) => {
-    // console.log(search);
-    if (search.dateTime) {
-      const convert = isoStringToDate(search.dateTime);
-      const day = convert.getDay();
-      const month = convert.getMonth();
-      //   console.log(day, month);
-      if (currMonth === month && currDay === day) {
-        todaysSearches += 1;
+  if (searches) {
+    searches.forEach((search) => {
+      // console.log(search);
+      if (search.dateTime) {
+        const convert = isoStringToDate(search.dateTime);
+        const day = convert.getDate();
+        const month = convert.getMonth();
+        //   console.log(day, month);
+        if (currMonth === month && currDay === day) {
+          todaysSearches += 1;
+        }
       }
-    }
-  });
+    });
+  }
   const num = todaysSearches;
 
   return <div>{num}</div>;
@@ -138,6 +119,7 @@ const CountSearchesByDay = ({ searches }) => {
 
 const CountSearchesByYesterday = ({ searches }) => {
   //   console.log(searches);
+  // all of these should be changed to use a mapped state from redux store
   let todaysSearches = 0;
   const date = new Date().toISOString();
 
@@ -150,31 +132,66 @@ const CountSearchesByYesterday = ({ searches }) => {
 
   const newDate = isoStringToDate(date);
 
-  const currDay = newDate.getDay() - 1;
+  const currDay = newDate.getDate() - 1;
   const currMonth = newDate.getMonth();
 
   //   console.log("curr month day", currDay, currMonth);
-  searches.forEach((search) => {
-    // console.log(search);
-    if (search.dateTime) {
-      const convert = isoStringToDate(search.dateTime);
-      const day = convert.getDay();
-      const month = convert.getMonth();
-      //   console.log(day, month);
-      if (currMonth === month && currDay === day) {
-        todaysSearches += 1;
+  if (searches) {
+    searches.forEach((search) => {
+      // console.log(search);
+      if (search.dateTime) {
+        const convert = isoStringToDate(search.dateTime);
+        const day = convert.getDate();
+        const month = convert.getMonth();
+        //   console.log(day, month);
+        if (currMonth === month && currDay === day) {
+          todaysSearches += 1;
+        }
       }
-    }
-  });
+    });
+  }
   const num = todaysSearches;
 
   return <div>{num}</div>;
 };
 
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+}))(TableRow);
+
+const useStyles = makeStyles({
+  table: {},
+});
+
 const StatBar = () => {
   const [terms, setTerms] = useState([]);
   const [reports, setReports] = useState([]);
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const mapState = useCallback((state) => {
+    return {
+      storeTerms: state.analyticsState.terms,
+      storeReports: state.analyticsState.reports,
+    };
+  }, []);
+
+  const { storeTerms, storeReports } = useMappedState(mapState);
+
   useEffect(() => {
     async function fetchTermData() {
       // You can await here
@@ -194,7 +211,9 @@ const StatBar = () => {
         "https://tp-report-backend.herokuapp.com/graphql",
         requestBody
       );
-      setTerms(data.data.searchterms); // ...
+      // setTerms(data.data.searchterms); // ...
+      const terms = data.data.searchterms;
+      dispatch({ type: actions.SET_TERMS, terms });
     }
 
     async function fetchReportsData() {
@@ -210,7 +229,7 @@ const StatBar = () => {
             dateTime
           }
         }
-            `,
+        `,
       };
 
       const { data } = await axios.post(
@@ -218,48 +237,54 @@ const StatBar = () => {
         requestBody
       );
       // console.log(data);
-      setReports(data.data.reports); // ...
+      // setReports(data.data.reports); // ...
+      const reports = data.data.reports;
+      dispatch({ type: actions.SET_REPORTS, reports });
+      // all of these need to be changed to dispatch actions
     }
-
 
     fetchTermData();
     fetchReportsData();
   }, []);
   return (
-    <Paper
-      elevation={1}
-      style={{ borderRadius: 10, marginBottom: 10, border: "5px solid grey" }}
+    <TableContainer
+      component={Paper}
+      elevation={3}
     >
-      <Table className={classes.table} aria-label="customized table">
+      <Table className={classes.table} size="small">
         <TableHead>
           <TableRow>
-            <StyledTableCell></StyledTableCell>
-            <StyledTableCell>Today</StyledTableCell>
-            <StyledTableCell>Yesterday</StyledTableCell>
+            <StyledTableCell style={{ color: "rgb(121, 121, 121)" }}>
+              Stats
+            </StyledTableCell>
+            <StyledTableCell>Searches</StyledTableCell>
+            <StyledTableCell>Reports</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           <StyledTableRow>
-            <StyledTableCell>Searches</StyledTableCell>
+            <StyledTableCell>Today</StyledTableCell>
             <StyledTableCell>
-              <CountSearchesByDay searches={terms} />
+              <CountSearchesByDay searches={storeTerms} />
             </StyledTableCell>
             <StyledTableCell>
-              <CountSearchesByYesterday searches={terms} />
+              {" "}
+              <CountReportsByYesterday reports={storeReports} />
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
-            <StyledTableCell>Reports</StyledTableCell>
+            <StyledTableCell>Yesterday</StyledTableCell>
             <StyledTableCell>
-              <CountReportsByDay reports={reports} />
+              {" "}
+              <CountSearchesByYesterday searches={storeTerms} />
             </StyledTableCell>
             <StyledTableCell>
-              <CountReportsByYesterday reports={reports} />
+              <CountReportsByDay reports={storeReports} />
             </StyledTableCell>
           </StyledTableRow>
         </TableBody>
       </Table>
-    </Paper>
+    </TableContainer>
   );
 };
 

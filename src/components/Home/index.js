@@ -25,6 +25,7 @@ const Home = () => {
     
     Geocode.fromAddress(loc).then(
       (response) => {
+        console.log(loc)
         const { lat, lng } = response.results[0].geometry.location;
         // console.log(lat, lng);
         // this.fetchMarkers(lat, lng);
