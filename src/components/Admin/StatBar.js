@@ -247,10 +247,7 @@ const StatBar = () => {
     fetchReportsData();
   }, []);
   return (
-    <TableContainer
-      component={Paper}
-      elevation={3}
-    >
+    <TableContainer component={Paper} elevation={3}>
       <Table className={classes.table} size="small">
         <TableHead>
           <TableRow>
@@ -269,7 +266,7 @@ const StatBar = () => {
             </StyledTableCell>
             <StyledTableCell>
               {" "}
-              <CountReportsByYesterday reports={storeReports} />
+              <CountReportsByDay reports={storeReports} />
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow>
@@ -279,7 +276,7 @@ const StatBar = () => {
               <CountSearchesByYesterday searches={storeTerms} />
             </StyledTableCell>
             <StyledTableCell>
-              <CountReportsByDay reports={storeReports} />
+              <CountReportsByYesterday reports={storeReports} />
             </StyledTableCell>
           </StyledTableRow>
         </TableBody>
